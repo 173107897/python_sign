@@ -8,7 +8,13 @@ from Crypto.Cipher import PKCS1_v1_5 as Cipher_pkcs1_v1_5
 import base64
 
 from requests import post
-
+#多账号模式 此处改为自己的配置手机号, 密码  pid统一用下面的那一个pid
+phoneArr=[
+''
+    ]
+passwordArr = [
+''
+]
 # 此处改为自己的配置 手机号, 密码, appId
 phone = 'xxx'
 password = 'xxx'
@@ -217,10 +223,20 @@ class UnicomSign():
 
 
 
+#if __name__ == '__main__':
+ #   user = UnicomSign()
+  #  user.login(phone, password)  # 用户登录   这里需要更改
+  #  user.daysign()  # 日常签到领积分，1g流量日包
+  #  user.daytask()  # 日常任务
+  #  #send_server('联通营业厅签到通知', user.resp)  # Server酱推送
+  #  # tgPush(user.resp)
 if __name__ == '__main__':
-    user = UnicomSign()
-    user.login(phone, password)  # 用户登录   这里需要更改
-    user.daysign()  # 日常签到领积分，1g流量日包
-    user.daytask()  # 日常任务
-    #send_server('联通营业厅签到通知', user.resp)  # Server酱推送
-    # tgPush(user.resp)
+    for i in range(len(phoneArr)):
+        print("开始号码尾号为",phoneArr[i][7:],"的账号")
+        user = UnicomSign()
+        user.login(phoneArr[i], passwordArr[i])  # 用户登录   这里需要更改
+        user.daysign()  # 日常签到领积分，1g流量日包
+        user.daytask()  # 日常任务
+        #send_server('联通营业厅签到通知', user.resp)  # Server酱推送
+        # tgPush(user.resp)
+        
